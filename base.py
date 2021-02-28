@@ -3,29 +3,16 @@ import os
 import csv
 import sys
 from pprint import pprint
+# name of the repository
+repo_name="ethereum/go-ethereum"
 
 token = os.getenv('GITHUB_TOKEN', '787f85f88e4bc128250495eb201652d3b616af7f')
 g = Github(token)
-repo = g.get_repo("ethereum/go-ethereum")
+repo = g.get_repo(repo_name)
 issues = repo.get_issues(state='all')
-'''for issue in issues[:25]:
-    print(issue.title)
-    print(issue.number)
-    print(issue.state)
-    print(issue.url)'''
-
-
-#for i in range(int(issues.totalCount/1000)):
-#    pprint(issues.get_page(i))
-'''print(type(issues.get_page(0)))
-print(issues.totalCount)
-print(len(issues.get_page(8)),11336/30)
-print(str(issues.get_page(8)[4]))
-print(str(issues.get_page(0)).find('number'))'''
 
 fields = ['issue', 'number', 'state','link']
-
-i=0
+# copying all the issues to a csv file
 with open("first_data_ethereum_go-ethereum_1.csv", "w", encoding='utf-8') as file:
     csv_file = csv.writer(file)
     cols = fields
@@ -33,8 +20,7 @@ with open("first_data_ethereum_go-ethereum_1.csv", "w", encoding='utf-8') as fil
     for issue in issues:
         row=[issue.title,issue.number,issue.state,'https://github.com/ethereum/go-ethereum/issues/'+str(issue.number)]
         csv_file.writerow(row)
-        print(i)
-        i=i+1
+      
 #for issue in issues[:10]:
     #row = [issue.title, issue.number, issue.state, 'https://github.com/ethereum/go-ethereum/issues/' + str(issue.number)]
     #print(row)
