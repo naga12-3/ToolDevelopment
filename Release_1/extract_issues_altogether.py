@@ -24,7 +24,7 @@ repo_names+=['ChainSafe/web3.js', 'ethereum/solidity', 'openethereum/parity-ethe
 repo_names1=repo_names
 l=[]
 total=0
-token = os.getenv('GITHUB_TOKEN', '7d77b5b5f0dc3d8b820b916223543fe7bcd036e7')
+token = os.getenv('GITHUB_TOKEN', github_access_token)
 g = Github(token)
 for repo_name in repo_names1:
     repo = g.get_repo(repo_name)
